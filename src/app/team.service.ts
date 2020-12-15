@@ -12,13 +12,11 @@ export class TeamService {
    }
 
   public getTeam() :Team {
-    debugger;
     return this.relevantTeam;
   }
 
   public setTeam(team: Team) : void{
     this.relevantTeam = team;
-    debugger;
   }
 
   public getTeamList(): Team[]{

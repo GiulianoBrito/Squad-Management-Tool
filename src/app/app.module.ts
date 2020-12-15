@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TeamEditComponent } from './team-edit/team-edit.component';
+import { TeamEditComponent, UrlValidatorDirective } from './team-edit/team-edit.component';
 import { TeamViewComponent } from './team-view/team-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TeamBoxComponent } from './team-box/team-box.component';
@@ -13,7 +13,8 @@ import { TeamBoxComponent } from './team-box/team-box.component';
     AppComponent,
     TeamEditComponent,
     TeamViewComponent,
-    TeamBoxComponent
+    TeamBoxComponent,
+    UrlValidatorDirective
   ],
   imports: [
     BrowserModule,

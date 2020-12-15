@@ -7,6 +7,10 @@ body{
     padding: 0;
 }
 
+textarea{
+    resize:none;
+}
+
 .card-block{
     margin-top:2rem;
     border-radius: 10px;
@@ -47,4 +51,8 @@ body{
     border-radius: 10px;
     border: 0;
 }
-    
+
+.flex-column{
+    display:flex;
+    flex-direction: column;
+}

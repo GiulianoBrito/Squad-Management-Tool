@@ -9,60 +9,96 @@
           <div class="col">TEAM INFORMATION</div>
         </div>
         <div class="container">
-          <div class="p-3 row">
-            <div class="col-md">
-              <p>Team Name</p>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="team.name"
-                required
-              />
-              <p>Description</p>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="team.description"
-              />
-            </div>
-            <div class="col-md">
-              <p>Team Website</p>
-              <input
-                type="url"
-                class="form-control"
-                [(ngModel)]="team.website"
-                required
-              />
-              <p>Team Type</p>
-              <div class="radio-group">
-                <span class="radio-item">
-                  <input
-                    name="radioGroupReal"
-                    type="radio"
-                    class="radio-item-input"
-                    [(ngModel)]="team.isReal"
-                    [value]="true"
-                    id="radioReal"
-                  />
-                  <label> Real </label>
+          <form #teamForm="ngForm" (ngSubmit)="onSubmit(teamForm)">
+            <div class="p-3 row">
+              <div class="col-md flex-column">
+                <label
+                  for="name"
+                  [class.label-error]="name.touched && name.invalid"
+                  >Team Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="team.name"
+                  name="name"
+                  #name="ngModel"
+                  placeholder="Insert team name"
+                  required
+                />
+                <label for="description">Description</label>
+                <textarea
+                  class="form-control field-grow"
+                  [(ngModel)]="team.description"
+                  name="description"
+                >
+                </textarea>
+              </div>
+              <div class="col-md">
+                <label
+                  for="website"
+                  [class.label-error]="website.touched && website.invalid"
+                  >Team Website</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="http://myteam.com"
+                  [(ngModel)]="team.website"
+                  name="website"
+                  #website="ngModel"
+                  urlValidator
+                />
+                <label
+                  [class.label-error]="radioReal.touched && radioReal.invalid"
+                  >Team Type</label
+                >
+                <div class="radio-group">
+                  <span class="radio-item">
+                    <input
+                      name="radioGroupReal"
+                      type="radio"
+                      class="radio-item-input"
+                      [(ngModel)]="team.isReal"
+                      [value]="true"
+                      id="radioReal"
+                      #radioReal="ngModel"
+                      required
+                    />
+                    <label> Real </label>
+                  </span>
+                  <span class="radio-item">
+                    <input
+                      name="radioGroupReal"
+                      type="radio"
+                      class="radio-item-input"
+                      [(ngModel)]="team.isReal"
+                      [value]="false"
+                      id="radioFantasy"
+                      required
+                    />
+                    <label> Fantasy </label>
+                  </span>
+                </div>
+                <label for="inputTag">Tags</label>            
+                <span
+                  *ngFor="let t of team.tags"
+                  (click)="removeTag(t)"
+                  class="badge rounded-pill team-tag"
+                  >{{ t }} X
                 </span>
-                <span class="radio-item">
-                  <input
-                    name="radioGroupReal"
-                    type="radio"
-                    class="radio-item-input"
-                    [(ngModel)]="team.isReal"
-                    [value]="false"
-                    id="radioFantasy"
-                  />
-                  <label> Fantasy </label>
-                </span>
+                <input
+                  id="inputTag"
+                  type="text"
+                  class="form-control"
+                  (keyup)="addTag($event)"
+                  [(ngModel)]="currentTag"
+                  name="inputTag"
+                />
               </div>
             </div>
-          </div>
-          <button (click)="saveTeam()" class="default-button w-100 m-2">
-            Save
-          </button>
+            <button type="submit" class="default-button w-100 m-2">Save</button>
+          </form>
         </div>
       </div>
     </div>
