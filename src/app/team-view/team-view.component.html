@@ -1,0 +1,42 @@
+<div class='container-fluid'>
+    <div class='row pt-4'>
+        <div class='col-md'>
+            <div class='card-block'>
+                <div class='p-4 row'>
+                    <div class='block-title col-8'>
+                        My Teams
+                    </div>
+                    <div class='col-4'>
+                        <button (click)='newTeam()' class='float-right add-team-button default-button'>
+                            <span class='add-team-button-text'>+</span>
+                        </button>
+                    </div>
+                </div>
+                <hr>
+                <div class='p-4'>
+                    <div class="row">
+                        <button (click)="sortName()" class="col-3">
+                            Name
+                        </button>
+                        <button (click)="sortDescription()" class="col-9">
+                            Description
+                        </button>
+                    </div>
+                    <div *ngFor="let t of teamList">
+                        <app-team-box [team]="t" (teamRemoved)="removeTeam($event)"></app-team-box>
+                    </div>
+                </div>
+            </div>       
+        </div>
+        <div class='col-md'>
+            <div class='card-block'>
+                <div class="p-4 row">
+                    <div class='block-title col'>
+                        Top 5
+                    </div>                       
+                </div>
+                <hr>                           
+            </div>
+        </div>
+    </div>
+</div>

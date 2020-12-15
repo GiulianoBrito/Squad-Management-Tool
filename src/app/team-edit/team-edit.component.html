@@ -1,0 +1,70 @@
+<div class="container-fluid">
+  <div class="row pt-4">
+    <div class="col-md">
+      <div class="card-block">
+        <div class="p-3 row">
+          <div class="block-title col pl-5">Create your team</div>
+        </div>
+        <div class="row">
+          <div class="col">TEAM INFORMATION</div>
+        </div>
+        <div class="container">
+          <div class="p-3 row">
+            <div class="col-md">
+              <p>Team Name</p>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="team.name"
+                required
+              />
+              <p>Description</p>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="team.description"
+              />
+            </div>
+            <div class="col-md">
+              <p>Team Website</p>
+              <input
+                type="url"
+                class="form-control"
+                [(ngModel)]="team.website"
+                required
+              />
+              <p>Team Type</p>
+              <div class="radio-group">
+                <span class="radio-item">
+                  <input
+                    name="radioGroupReal"
+                    type="radio"
+                    class="radio-item-input"
+                    [(ngModel)]="team.isReal"
+                    [value]="true"
+                    id="radioReal"
+                  />
+                  <label> Real </label>
+                </span>
+                <span class="radio-item">
+                  <input
+                    name="radioGroupReal"
+                    type="radio"
+                    class="radio-item-input"
+                    [(ngModel)]="team.isReal"
+                    [value]="false"
+                    id="radioFantasy"
+                  />
+                  <label> Fantasy </label>
+                </span>
+              </div>
+            </div>
+          </div>
+          <button (click)="saveTeam()" class="default-button w-100 m-2">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

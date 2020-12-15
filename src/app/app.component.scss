@@ -1,0 +1,32 @@
+.main-header{
+    position:sticky;
+    top:0;
+    height:64px;
+    background-image: linear-gradient(to right, #BE0E4F, #862268);
+}
+
+
+.logo{
+    color:white;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+.user-profile{
+    color:white;
+    font-weight: 600;
+}
+
+.main-content{
+    background-color: #F7F3F7;
+    min-height:calc(100% - 96px);
+}
+
+.footer{
+    background-color: #E9E3E9;
+    height: 32px;
+    text-align: center;
+    font-size:small;
+    vertical-align: middle;
+    line-height: 32px;
+}

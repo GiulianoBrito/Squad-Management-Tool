@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+body{
+    height:100vh;
+    margin:0;
+    padding: 0;
+}
+
+.card-block{
+    margin-top:2rem;
+    border-radius: 10px;
+    border: 1px solid #E5E5E5 ;
+    background-color: #FFF;
+    overflow: hidden;
+}
+
+.block-title{
+    font-size:large;
+    color: #5F3890;
+    font-weight: bold;
+}
+
+.radio-group{
+    display:flex;
+    flex-wrap: wrap;
+    width:100%;
+}
+
+.radio-item{
+    flex-basis: 25%;    
+    color: #AF3A81;
+}
+
+.radio-item-input{
+    margin: 0 0.25rem 0 0.25rem;
+    border-color: #AF3A81;
+    color: #AF3A81;
+}
+
+.default-button{
+    background-image: linear-gradient(to bottom, #A5397B, #862268);
+    color:#FFF;
+    text-align: center;
+    font-weight: bold;
+    cursor:pointer;
+    border-radius: 10px;
+    border: 0;
+}
+    
