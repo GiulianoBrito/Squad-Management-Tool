@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Team } from './models';
+import { Player } from './models/player';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,19 @@ import { Team } from './models';
 export class TeamService {
   private relevantTeam: Team = new Team();
   private teamList!: Team[];
+  private leastPickedPlayer: Player = {
+    "name":"Zinedini Zidane",
+    "age":23,
+    "initials": "ZZ",
+    "nacionality":"France"
+  };
+  private mostPickedPlayer: Player= {
+    "name":"Zinedini Zidane",
+    "age":23,
+    "initials": "ZZ",
+    "nacionality":"France"
+  };
+
   constructor() {
     this.teamList = JSON.parse(localStorage.getItem('teamList') || '[]');
    }
@@ -36,6 +50,14 @@ export class TeamService {
       this.teamList.splice(idx,1);
     }
     this.saveState();
+  }
+
+  getMostPickedPlayer():Player{
+    return this.mostPickedPlayer;
+  }
+
+  getLeastPickedPlayer():Player{
+    return this.leastPickedPlayer;
   }
 
   public saveState(){

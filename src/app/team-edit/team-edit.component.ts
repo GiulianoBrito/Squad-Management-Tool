@@ -23,7 +23,6 @@ export class TeamEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.team = this.teamService.getTeam();
-    this.team.isReal = undefined;
   }
 
   onSubmit(teamForm: NgForm): void {
@@ -64,7 +63,6 @@ export class TeamEditComponent implements OnInit {
 })
 export class UrlValidatorDirective implements Validator {
   validate(control: AbstractControl): { [key: string]: any } | null {
-    console.log('oi');
     let matcher = (control.value as String).match(
       /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
     );

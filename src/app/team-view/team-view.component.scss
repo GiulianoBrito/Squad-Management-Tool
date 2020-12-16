@@ -4,7 +4,50 @@
 }
 .add-team-button-text{
     font-size: xx-large;
-    top: -0.7rem;
-    left: -0.2rem;
-    position: relative;
+    top: -0.75rem;
+    right: 1.25rem;
+    float:right;
+    position: absolute;
+}
+
+.card-block.purple-card{
+    background-image: linear-gradient(to bottom, #BD3E7B, #662F86);
+    color:#FFF;
+    font-size:x-large;
+    font-weight: bold;
+    text-align: center;
+    border: 0px;
+    position:relative;
+}
+
+.player-icon{
+    margin:0.5rem;
+    width:10rem;
+    height:10rem;
+    border: #8D0877 solid 1px;
+    border-radius: 50%;
+    align-self: center;
+    background-color: #F3F5F7;
+    overflow:hidden;
+    color: #333333;
+    font-size: 5rem;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.separator{
+    height:100%;
+    border-left: solid 1px #bbb;
+    position:absolute;
+    left:50%;
+}
+.ball{
+    height:5rem;
+    width:5rem;
+    border: solid 1px #bbb;
+    position:absolute;    
+    top:50%;
+    left:50%;
+    margin:-2.5rem 0 0 -2.5rem;
+    border-radius:50%;
 }

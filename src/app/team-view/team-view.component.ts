@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Team } from '../models';
+import { Player } from '../models/player';
 import { TeamService } from '../team.service';
 
 @Component({
@@ -12,11 +13,17 @@ export class TeamViewComponent implements OnInit {
   public teamList!: Team[];
   private isSortedNameAsc: boolean = false;
   private isSortedDescriptionAsc: boolean = false;
+  public mostPickedPlayer!: Player;
+  public leastPickedPlayer!: Player;
+
   constructor(private router: Router, private teamService: TeamService) {
     this.teamList = teamService.getTeamList();
+    this.leastPickedPlayer = this.teamService.getLeastPickedPlayer();
+    this.mostPickedPlayer = this.teamService.getMostPickedPlayer();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   newTeam(): void {
     this.teamService.setTeam(new Team());
