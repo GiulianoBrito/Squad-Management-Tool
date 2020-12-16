@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Team } from '../models';
+import { Player } from '../models/player';
 import { TeamService } from '../team.service';
 
 @Component({
@@ -18,11 +19,16 @@ import { TeamService } from '../team.service';
 export class TeamEditComponent implements OnInit {
   public team!: Team;
   public currentTag: String = '';
+  public availablePlayers!: Player[];
+  public searchTerm: String = '';
 
-  constructor(private router: Router, private teamService: TeamService) {}
+  constructor(private router: Router, private teamService: TeamService) {
+  }
 
   ngOnInit(): void {
     this.team = this.teamService.getTeam();
+    this.team.players.push(new Player());
+    this.availablePlayers = this.teamService.getMatchingPlayers("");
   }
 
   onSubmit(teamForm: NgForm): void {
@@ -48,6 +54,10 @@ export class TeamEditComponent implements OnInit {
 
   removeTag(tag: String): void {
     this.team.tags.splice(this.team.tags.indexOf(tag), 1);
+  }
+
+  searchPlayers() : void{
+    this.availablePlayers = this.teamService.getMatchingPlayers(this.searchTerm);
   }
 }
 

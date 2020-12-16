@@ -7,6 +7,7 @@ import { TeamEditComponent, UrlValidatorDirective } from './team-edit/team-edit.
 import { TeamViewComponent } from './team-view/team-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TeamBoxComponent } from './team-box/team-box.component';
+import { PlayerBoxComponent } from './player-box/player-box.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { TeamBoxComponent } from './team-box/team-box.component';
     TeamEditComponent,
     TeamViewComponent,
     TeamBoxComponent,
-    UrlValidatorDirective
+    UrlValidatorDirective,
+    PlayerBoxComponent
   ],
   imports: [
     BrowserModule,

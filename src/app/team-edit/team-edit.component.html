@@ -9,7 +9,7 @@
           <div class="col">TEAM INFORMATION</div>
         </div>
         <div class="container">
-          <form #teamForm="ngForm" (ngSubmit)="onSubmit(teamForm)">
+          <form #teamForm="ngForm" (ngSubmit)="onSubmit(teamForm)" (keydown.enter)="$event.preventDefault()">
             <div class="p-3 row">
               <div class="col-md flex-column">
                 <label
@@ -80,7 +80,7 @@
                     <label> Fantasy </label>
                   </span>
                 </div>
-                <label for="inputTag">Tags</label>            
+                <label for="inputTag">Tags</label>
                 <span
                   *ngFor="let t of team.tags"
                   (click)="removeTag(t)"
@@ -99,6 +99,30 @@
             </div>
             <button type="submit" class="default-button w-100 m-2">Save</button>
           </form>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              
+            </div>
+            <div class="col">
+              <label
+                  for="search"                  
+                  >Search Players</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search..."
+                  (keyup)="searchPlayers()"
+                  [(ngModel)]="searchTerm"
+                  name="search"
+                />
+              <div *ngFor="let p of availablePlayers">
+                <app-player-box [player]="p"></app-player-box>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

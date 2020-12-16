@@ -9,7 +9,7 @@
               (click)="newTeam()"
               class="float-right add-team-button default-button"
             >
-              <span class="add-team-button-text">+</span>
+            <span class="add-team-button-text">+</span>
             </button>
           </div>
         </div>
@@ -44,14 +44,14 @@
         <div class="p-5 row no-gutters">
           <div class="col flex-column">
             Most Picked Player
-            <div class="player-icon">ZZ</div>
+            <div class="player-icon">{{mostPickedPlayer.initials}}</div>
             <span style="position: relative; top: -10rem; left: 6rem">
               75%
             </span>
           </div>
           <div class="col flex-column">
             Least Picked Player
-            <div class="player-icon">CR</div>
+            <div class="player-icon">{{leastPickedPlayer.initials}}</div>
             <span style="position: relative; top: -10rem; left: 6rem">
               25%
             </span>

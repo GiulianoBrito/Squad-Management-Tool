@@ -8,17 +8,33 @@ import { Player } from './models/player';
 export class TeamService {
   private relevantTeam: Team = new Team();
   private teamList!: Team[];
+  private allPlayers: Player[] =[{
+    "name":"Zinedini Zidane",
+    "age":23,    
+    "nacionality":"France",
+    "initials": "ZZ"
+  },{
+    "name":"Cristiano Ronaldo",
+    "age":30,
+    "nacionality":"Portugal",
+    "initials": "CR"
+  },{
+    "name":"Ronaldo da Silva de Souza",
+    "age":18,
+    "nacionality":"Brazil",
+    "initials": "RS"  
+  }]
   private leastPickedPlayer: Player = {
     "name":"Zinedini Zidane",
     "age":23,
-    "initials": "ZZ",
-    "nacionality":"France"
+    "nacionality":"France",
+    "initials": "ZZ"
   };
   private mostPickedPlayer: Player= {
-    "name":"Zinedini Zidane",
-    "age":23,
-    "initials": "ZZ",
-    "nacionality":"France"
+    "name":"Cristiano Ronaldo",
+    "age":24,
+    "nacionality":"Portugal",
+    "initials": "CR"
   };
 
   constructor() {
@@ -52,15 +68,24 @@ export class TeamService {
     this.saveState();
   }
 
-  getMostPickedPlayer():Player{
+  public getAllPlayers():Player[]{
+    return this.allPlayers;
+  }
+
+  public getMostPickedPlayer():Player{
     return this.mostPickedPlayer;
   }
 
-  getLeastPickedPlayer():Player{
+  public getLeastPickedPlayer():Player{
     return this.leastPickedPlayer;
   }
 
   public saveState(){
     localStorage.setItem('teamList',JSON.stringify(this.teamList));
   }
+
+  public getMatchingPlayers(searchTerm:String):Player[]{
+    return this.allPlayers.filter(valid => valid.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
+  }
+
 }
