@@ -26,7 +26,7 @@
 }
 
 .sort-button:hover{
-    background-color: #f4f4f4;
+    background-color: #eee;
 }
 
 
@@ -54,6 +54,10 @@
     cursor:pointer;
 }
 
+.top-items:hover{
+    background-color: #eee;
+}
+
 .player-icon{
     margin:0.5rem;
     width:10rem;
@@ -75,6 +79,14 @@
     border-left: solid 1px #bbb;
     position:absolute;
     left:50%;
+    @media screen and (max-width: 540px){
+        height:0;
+        width:100%;
+        left:0;
+        top:50%;
+        border-left: 0;
+        border-bottom: solid 1px #bbb;
+    }
 }
 
 .field-ball{
@@ -86,4 +98,9 @@
     left:50%;
     margin:-2.5rem 0 0 -2.5rem;
     border-radius:50%;
+    @media screen and (max-width: 540px){
+        margin:-1.5rem 0 0 -1.5rem;
+        height:3rem;
+        width:3rem;
+    }
 }
