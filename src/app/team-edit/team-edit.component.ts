@@ -95,6 +95,8 @@ export class TeamEditComponent implements OnInit {
 
   updateFormation(){
     this.currentFormation = this.formations[this.formationKey];
+    this.team.players.forEach((p)=> p.isAvailable = true);
+    this.team.players = [];
   }
 
 }
