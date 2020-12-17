@@ -1,0 +1,30 @@
+fa-icon{
+   color: #B13D7C;
+   background-color: none;
+}
+
+button{
+    background: none;
+    text-align: center;
+    border: 0;
+    visibility:hidden;
+}
+
+:hover{
+    background-color: #F7EEF7;
+    border-radius: 5%;
+    color:#B13D7C;
+}
+
+:hover button{
+    visibility:visible;
+}
+
+span{
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.row{
+    border-bottom: solid 1px #eee;
+}

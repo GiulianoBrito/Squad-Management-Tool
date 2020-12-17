@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Team } from '../models';
 import { Player } from '../models/player';
 import { TeamService } from '../team.service';
+import { faSort} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-team-view',
@@ -17,6 +18,8 @@ export class TeamViewComponent implements OnInit {
   public leastPickedPlayer!: Player;
   public highestAgeTeams!: Team[];
   public lowestAgeTeams!: Team[];
+  sortNameIcon = faSort;
+  sortDescIcon = faSort;
 
   constructor(private router: Router, private teamService: TeamService) {
     this.teamList = teamService.getTeamList();

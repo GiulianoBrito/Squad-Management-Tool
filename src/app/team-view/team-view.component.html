@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row px-3">
     <div class="col-md">
-      <div class="card-block">
+      <div class="card-block h-100">
         <div class="p-4 row">
           <div class="block-title col-8">My Teams</div>
           <div class="col-4">
@@ -15,17 +15,18 @@
         </div>
         <hr />
         <div class="p-4">
-          <div class="row">
-            <button (click)="sortName()" class="col-3">Name</button>
-            <button (click)="sortDescription()" class="col-9">
-              Description
+          <div class="row no-gutters">
+            <button (click)="sortName()" class="col-3 sort-button">Name <fa-icon [icon]="sortNameIcon"></fa-icon></button>
+            <span class="sort-separator"></span>
+            <button (click)="sortDescription()" class="col-9 sort-button sort-button-right">
+              Description <fa-icon [icon]="sortDescIcon"></fa-icon>
             </button>
           </div>
           <div *ngFor="let t of teamList">
             <app-team-box
               [team]="t"
               (teamRemoved)="removeTeam($event)"
-            ></app-team-box>
+            ></app-team-box>       
           </div>
         </div>
       </div>
@@ -56,8 +57,8 @@
         </div>
       </div>
       <div class="card-block purple-card">
-        <div class="separator"></div>
-        <div class="ball"></div>
+        <div class="field-separator"></div>
+        <div class="field-ball"></div>
         <div class="p-5 row no-gutters">
           <div class="col flex-column">
             Most Picked Player

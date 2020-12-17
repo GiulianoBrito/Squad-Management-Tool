@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TeamBoxComponent } from './team-box/team-box.component';
 import { PlayerBoxComponent } from './player-box/player-box.component';
 import { DragulaModule } from 'ng2-dragula';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DragulaModule } from 'ng2-dragula';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    DragulaModule.forRoot()
+    DragulaModule.forRoot(),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

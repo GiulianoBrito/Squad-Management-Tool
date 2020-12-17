@@ -2,6 +2,7 @@
     width: 2rem;
     height: 2rem;
 }
+
 .add-team-button-text{
     font-size: xx-large;
     top: -0.75rem;
@@ -9,6 +10,25 @@
     float:right;
     position: absolute;
 }
+
+.sort-button{
+    display:flex;
+    justify-content: space-between;
+    font-weight: 600;
+    padding: 0.6rem;
+    margin: 1rem 0;
+    border:0;
+    background: none;
+}
+
+.sort-button.sort-button-right{
+    border-left: 1px solid #DDD;
+}
+
+.sort-button:hover{
+    background-color: #f4f4f4;
+}
+
 
 .card-block.purple-card{
     background-image: linear-gradient(to bottom, #BD3E7B, #662F86);
@@ -49,13 +69,15 @@
     display: flex;
     flex-direction: column;
 }
-.separator{
+
+.field-separator{
     height:100%;
     border-left: solid 1px #bbb;
     position:absolute;
     left:50%;
 }
-.ball{
+
+.field-ball{
     height:5rem;
     width:5rem;
     border: solid 1px #bbb;

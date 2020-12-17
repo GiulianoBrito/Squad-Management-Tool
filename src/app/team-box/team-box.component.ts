@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Team } from '../models';
 import { TeamService } from '../team.service';
+import { faPencilAlt,faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-team-box',
@@ -9,6 +10,8 @@ import { TeamService } from '../team.service';
   styleUrls: ['./team-box.component.scss']
 })
 export class TeamBoxComponent implements OnInit {
+  faPencilAlt = faPencilAlt;
+  faTrash = faTrash;
   
   @Input()
   public team!: Team;
