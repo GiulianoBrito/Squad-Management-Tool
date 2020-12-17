@@ -1,34 +1,88 @@
-label{
-    font-weight: 600;
-    padding: 0.5rem 0 0.5rem 0;
+label {
+  font-weight: 600;
+  padding: 0.5rem 0 0.5rem 0;
 }
 
-.subtitle{
+.subtitle {
+  text-align: center;
+  color: #909090;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.radio-label {
+  padding: 0;
+  font-weight: normal;
+}
+
+.team-tag {
+  background-color: #c50341;
+  color: #ffffff;
+  font-weight: normal;
+  cursor: pointer;
+  margin-left: 0.25rem;
+}
+
+.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+.classe-inicial:hover + div{
+    visibility:visible;
+}
+
+.label-error {
+  color: red;
+}
+
+.field-grow {
+  flex: 1 0 100px;
+}
+
+.player-field {
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid #909090;
+  border-radius: 50%;
+  text-align: center;
+  padding:0.75rem;
+  margin:-2rem ;
+  background-color: rgba(#fff,0.75);
+  color:#555;
+  position:absolute;
+}
+
+.field-card{
+    background-image: linear-gradient(to bottom, #BD3E7B, #662F86);
+    color:#FFF;
+    font-size:x-large;
+    font-weight: bold;
     text-align: center;
-    color: #909090;
-    font-weight: 600;
+    border: 0px;
+    position:relative;
+    margin: 0.5rem 3rem;
+    min-height: 540px;
 }
 
-.radio-label{
-    padding: 0;
-    font-weight: normal;
-}
-.team-tag{
-    background-color: #C50341;
-    color: #ffffff;
-    font-weight: normal;
-    cursor:pointer;
-    margin-left: 0.25rem;
+.field-separator {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  border-bottom: solid 1px #bbb;
 }
 
-.ng-invalid.ng-touched{
-    border-color: red;
+.field-ball {
+  height: 5rem;
+  width: 5rem;
+  border: solid 1px #bbb;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -2.5rem 0 0 -2.5rem;
+  border-radius: 50%;
 }
 
-.label-error{
-    color:red; 
-}
-
-.field-grow{
-    flex: 1 0 100px;
+.drag-target{
+    height:540px;
+    width:100%;
 }

@@ -1,6 +1,4 @@
 .main-header{
-    position:sticky;
-    top:0;
     height:64px;
     background-image: linear-gradient(to right, #BE0E4F, #862268);
     z-index: 1;
@@ -19,7 +17,8 @@
 
 .main-content{
     background-color: #F7F3F7;
-    min-height:calc(100% - 96px);
+    height:calc(100% - 96px);
+    overflow:auto;
 }
 
 .footer{

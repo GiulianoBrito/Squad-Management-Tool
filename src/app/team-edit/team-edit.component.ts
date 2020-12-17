@@ -1,15 +1,13 @@
-import { Component, Directive, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   NgForm,
-  NG_VALIDATORS,
-  Validator,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
 import { Team } from '../models';
 import { Player } from '../models/player';
 import { TeamService } from '../team.service';
+import { FORMATIONS } from './formation.config';
 
 @Component({
   selector: 'app-team-edit',
@@ -21,14 +19,21 @@ export class TeamEditComponent implements OnInit {
   public currentTag: String = '';
   public availablePlayers!: Player[];
   public searchTerm: String = '';
+  public formations = FORMATIONS;
+  public formationKey: string = '3-2-2-3';
+  public keyList: string[];
+  public currentFormation = this.formations[this.formationKey];
 
-  constructor(private router: Router, private teamService: TeamService,private dragulaService: DragulaService) { 
-  dragulaService.createGroup('COPYABLE', {
+  constructor(private router: Router, private teamService: TeamService, private dragulaService: DragulaService) {   
+  }
+
+  ngOnInit(): void {
+    this.dragulaService.createGroup('COPYABLE', {
       copy: (el, source) => {        
         return (source.id === 'source' && !el.classList.contains('disabled'));        
       },
       copyItem: (player:Player) => {
-        teamService.announcePlayerAdded(player.name);
+        this.teamService.announcePlayerAdded(player.name);
         return player},
       accepts: (el, target, source, sibling) => {
         // To avoid dragging to source container
@@ -37,17 +42,16 @@ export class TeamEditComponent implements OnInit {
       revertOnSpill: true,
       moves: (el, target, source, sibling) => {
         return !(el.classList.contains('disabled') || source.id === "target");}
-    });
-  }
-
-  ngOnInit(): void { 
+    }); 
     this.team = this.teamService.getTeam();
     this.searchPlayers();
+    this.keyList = Object.keys(this.formations);
   }
 
   ngOnDestroy():void{
     this.dragulaService.destroy('COPYABLE');
   } 
+
 
   onSubmit(teamForm: NgForm): void {
     if (!teamForm.form.valid) {
@@ -88,29 +92,9 @@ export class TeamEditComponent implements OnInit {
     this.team.players.forEach((p)=> ageSum += p.age);    
     this.team.avgAge = ageSum/this.team.players.length;    
   }
-}
 
-@Directive({
-  selector: '[urlValidator]',
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: UrlValidatorDirective,
-      multi: true,
-    },
-  ],
-})
-export class UrlValidatorDirective implements Validator {
-  validate(control: AbstractControl): { [key: string]: any } | null {
-    let matcher = (control.value as String).match(
-      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
-    );
-    if (!matcher) {
-      return {
-        url: true,
-      };
-    } else {
-      return null;
-    }
+  updateFormation(){
+    this.currentFormation = this.formations[this.formationKey];
   }
+
 }

@@ -1,10 +1,14 @@
 <div class="container-fluid">
-  <div class="row pt-4">
+  <div class="row mb-4">
     <div class="col-md">
       <div class="card-block">
         <div class="p-3 row">
-          <div *ngIf="team.name == ''" class="block-title col pl-5">Create your team</div>
-          <div *ngIf="team.name != ''" class="block-title col pl-5">Edit your team</div>
+          <div *ngIf="team.name == ''" class="block-title col pl-5">
+            Create your team
+          </div>
+          <div *ngIf="team.name != ''" class="block-title col pl-5">
+            Edit your team
+          </div>
         </div>
         <div class="row">
           <div class="col subtitle">TEAM INFORMATION</div>
@@ -111,10 +115,27 @@
           </div>
           <div class="row">
             <div class="col-md">
-              <div class="h-100" dragula="COPYABLE"  [(dragulaModel)]="team.players">
-                  <div id="target" *ngFor="let pa of team.players">
-                    {{pa.initials}}
+              <select class="form-control" (change)="updateFormation()" [(ngModel)]="formationKey">
+                <option [ngValue]="k" *ngFor="let k of keyList">{{k}}</option>
+              </select>
+              <div class="field-card card-block">
+              <div class="field-separator"></div>
+              <div class="field-ball"></div>
+                <div
+                  class="drag-target"
+                  dragula="COPYABLE"
+                  [(dragulaModel)]="team.players"
+                >
+                  <div
+                    id="target"
+                    class="player-field"
+                    *ngFor="let slot of currentFormation;index as idx"
+                    [style.top]="slot.top"
+                    [style.left]="slot.left"
+                  >
+                    <ng-container *ngIf="team.players[idx] !== undefined">{{ team.players[idx].initials }}</ng-container>
                   </div>
+                </div>
               </div>
             </div>
             <div class="col-md">
@@ -127,9 +148,17 @@
                 [(ngModel)]="searchTerm"
                 name="search"
               />
-              <div class= "h-100" dragula="COPYABLE" id="source" [(dragulaModel)]="availablePlayers">
-                <div [class.disabled]="!p.isAvailable" *ngFor="let p of availablePlayers">
-                  <app-player-box  [player]="p"></app-player-box>
+              <div
+                class="h-100"
+                dragula="COPYABLE"
+                id="source"
+                [(dragulaModel)]="availablePlayers"
+              >
+                <div
+                  [class.disabled]="!p.isAvailable"
+                  *ngFor="let p of availablePlayers"
+                >
+                  <app-player-box [player]="p"></app-player-box>
                 </div>
               </div>
             </div>

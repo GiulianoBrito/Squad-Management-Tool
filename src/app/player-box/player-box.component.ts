@@ -14,19 +14,25 @@ export class PlayerBoxComponent implements OnInit {
 
   @Output()
   public playerAdded = new EventEmitter<Player>();
-  
+
   subscription: Subscription;
 
-  constructor(teamService: TeamService) {
-    this.subscription = teamService.playerAdded$.subscribe(playerName => {
-      if(this.player.name === playerName){
-        this.addPlayer();
+  constructor(private teamService: TeamService) {}
+
+  ngOnInit(): void {
+    this.subscription = this.teamService.playerAdded$.subscribe(
+      (playerName) => {
+        if (this.player.name === playerName) {
+          this.addPlayer();
+        }
       }
-    })
+    );
   }
 
-  ngOnInit(): void {}
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+  
   addPlayer(): void {
     if (this.player.isAvailable) {
       this.playerAdded.emit(this.player);
