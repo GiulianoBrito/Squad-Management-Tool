@@ -58,9 +58,9 @@ export class TeamService {
   
   public addTeam(team: Team) : void{
     if(this.teamList.indexOf(team) === -1){
-      this.teamList.push(team);
-      this.saveState();
-    } 
+      this.teamList.push(team);     
+    }  
+    this.saveState();
   }
 
   public removeTeam(team: Team): void{

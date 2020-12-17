@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
-import { Subscription } from 'rxjs';
 import { Team } from '../models';
 import { Player } from '../models/player';
 import { TeamService } from '../team.service';
@@ -36,7 +35,8 @@ export class TeamEditComponent implements OnInit {
         return target.id !== 'source';
       },
       revertOnSpill: true,
-      moves: (el, target, source, sibling) => {return !el.classList.contains('disabled');}
+      moves: (el, target, source, sibling) => {
+        return !(el.classList.contains('disabled') || source.id === "target");}
     });
   }
 
@@ -76,7 +76,7 @@ export class TeamEditComponent implements OnInit {
 
   searchPlayers() : void{
     this.availablePlayers = this.teamService.getMatchingPlayers(this.searchTerm);
-    this.availablePlayers.forEach(p => p.isAvailable = !this.team.players.includes(p));
+    this.availablePlayers.forEach(p => p.isAvailable = (this.team.players.find((pl)=> p.name === pl.name) === undefined));
   }
 
   addPlayer(player: Player):void{
