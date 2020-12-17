@@ -20,6 +20,20 @@
     position:relative;
 }
 
+.card-block.gray-bg{
+    background-color: #E8E2E7;
+}
+
+.top-items{
+    display:flex;
+    justify-content: space-between;
+    margin:0.25rem;
+    background-color: white;
+    padding:0.5rem 1.5rem;
+    border-radius: 5px;
+    cursor:pointer;
+}
+
 .player-icon{
     margin:0.5rem;
     width:10rem;

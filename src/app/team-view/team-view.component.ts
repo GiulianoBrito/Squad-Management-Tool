@@ -15,6 +15,8 @@ export class TeamViewComponent implements OnInit {
   private isSortedDescriptionAsc: boolean = false;
   public mostPickedPlayer!: Player;
   public leastPickedPlayer!: Player;
+  public highestAgeTeams!: Team[];
+  public lowestAgeTeams!: Team[];
 
   constructor(private router: Router, private teamService: TeamService) {
     this.teamList = teamService.getTeamList();
@@ -23,10 +25,17 @@ export class TeamViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.highestAgeTeams = this.teamService.getHighestAgeTeams();
+    this.lowestAgeTeams = this.teamService.getLowestAgeTeams();
   }
 
   newTeam(): void {
     this.teamService.setTeam(new Team());
+    this.router.navigate(['/edit']);
+  }
+
+  editTeam(team:Team):void{
+    this.teamService.setTeam(team);
     this.router.navigate(['/edit']);
   }
 

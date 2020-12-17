@@ -95,4 +95,12 @@ export class TeamService {
     this.playerAddedSource.next(playerName);
   }
 
+  public getLowestAgeTeams():Team[]{
+    return this.teamList.sort((a,b)=> (a.avgAge > b.avgAge)? 1 :-1).slice(0,5);
+  }
+
+  public getHighestAgeTeams():Team[]{
+    return this.teamList.sort((a,b)=> (a.avgAge < b.avgAge)? 1 :-1).slice(0,5);
+  }
+
 }
