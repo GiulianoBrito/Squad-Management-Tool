@@ -3,4 +3,10 @@
     border: 1px #DADADA dashed;
     background-image: linear-gradient(to bottom,#FFF,#E5E5E5);
     color: #C50341;
+    cursor:pointer;
+}
+
+.disabled{
+    cursor:not-allowed;
+    background-image: linear-gradient(to bottom,#EEE,#B5b5b5);
 }

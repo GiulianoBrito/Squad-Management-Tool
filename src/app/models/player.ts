@@ -3,4 +3,5 @@ export class Player{
     public age: number = 0;
     public nacionality: string = '';
     public initials?: string;
+    public isAvailable?: boolean;
 }

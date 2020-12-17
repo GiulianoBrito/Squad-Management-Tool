@@ -1,5 +1,4 @@
-import { stringify } from '@angular/compiler/src/util';
-import { Component, Directive, OnInit } from '@angular/core';
+import { Component, Directive, OnInit, SimpleChanges } from '@angular/core';
 import {
   AbstractControl,
   NgForm,
@@ -7,6 +6,8 @@ import {
   Validator,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DragulaService } from 'ng2-dragula';
+import { Subscription } from 'rxjs';
 import { Team } from '../models';
 import { Player } from '../models/player';
 import { TeamService } from '../team.service';
@@ -22,20 +23,38 @@ export class TeamEditComponent implements OnInit {
   public availablePlayers!: Player[];
   public searchTerm: String = '';
 
-  constructor(private router: Router, private teamService: TeamService) {
+  constructor(private router: Router, private teamService: TeamService,private dragulaService: DragulaService) { 
+  dragulaService.createGroup('COPYABLE', {
+      copy: (el, source) => {        
+        return (source.id === 'source' && !el.classList.contains('disabled'));        
+      },
+      copyItem: (player:Player) => {
+        teamService.announcePlayerAdded(player.name);
+        return player},
+      accepts: (el, target, source, sibling) => {
+        // To avoid dragging to source container
+        return target.id !== 'source';
+      },
+      revertOnSpill: true,
+      moves: (el, target, source, sibling) => {return !el.classList.contains('disabled');}
+    });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     this.team = this.teamService.getTeam();
-    this.team.players.push(new Player());
-    this.availablePlayers = this.teamService.getMatchingPlayers("");
+    this.searchPlayers();
   }
+
+  ngOnDestroy():void{
+    this.dragulaService.destroy('COPYABLE');
+  } 
 
   onSubmit(teamForm: NgForm): void {
     if (!teamForm.form.valid) {
       teamForm.form.markAllAsTouched();
       return;
     }
+    this.calcAvgAge();
     this.teamService.addTeam(this.team);
     this.router.navigate(['/']);
   }
@@ -48,7 +67,6 @@ export class TeamEditComponent implements OnInit {
         this.team.tags.push(this.currentTag);
       }
       this.currentTag = '';
-      console.log(this.team.tags);
     }
   }
 
@@ -58,6 +76,17 @@ export class TeamEditComponent implements OnInit {
 
   searchPlayers() : void{
     this.availablePlayers = this.teamService.getMatchingPlayers(this.searchTerm);
+    this.availablePlayers.forEach(p => p.isAvailable = !this.team.players.includes(p));
+  }
+
+  addPlayer(player: Player):void{
+    this.team.players.push(player);
+  }
+
+  calcAvgAge():void{
+    var ageSum: number = 0;
+    this.team.players.forEach((p)=> ageSum += p.age);    
+    this.team.avgAge = ageSum/this.team.players.length;    
   }
 }
 

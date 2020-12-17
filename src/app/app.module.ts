@@ -8,6 +8,7 @@ import { TeamViewComponent } from './team-view/team-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TeamBoxComponent } from './team-box/team-box.component';
 import { PlayerBoxComponent } from './player-box/player-box.component';
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PlayerBoxComponent } from './player-box/player-box.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DragulaModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

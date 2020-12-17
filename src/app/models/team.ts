@@ -7,4 +7,5 @@ export class Team{
     public isReal?: boolean;
     public tags: String[] = [];
     public players: Player[] = [];
+    public avgAge?: number;
 }

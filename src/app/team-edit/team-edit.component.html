@@ -9,7 +9,11 @@
           <div class="col">TEAM INFORMATION</div>
         </div>
         <div class="container">
-          <form #teamForm="ngForm" (ngSubmit)="onSubmit(teamForm)" (keydown.enter)="$event.preventDefault()">
+          <form
+            #teamForm="ngForm"
+            (ngSubmit)="onSubmit(teamForm)"
+            (keydown.enter)="$event.preventDefault()"
+          >
             <div class="p-3 row">
               <div class="col-md flex-column">
                 <label
@@ -103,23 +107,27 @@
         <div class="container">
           <div class="row">
             <div class="col">
-              
+              {{team.avgAge}}
+              <div class="h-100" dragula="COPYABLE" id="target" [(dragulaModel)]="team.players">
+                  <div *ngFor="let pa of team.players">
+                    {{pa.initials}}
+                  </div>
+              </div>
             </div>
             <div class="col">
-              <label
-                  for="search"                  
-                  >Search Players</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search..."
-                  (keyup)="searchPlayers()"
-                  [(ngModel)]="searchTerm"
-                  name="search"
-                />
-              <div *ngFor="let p of availablePlayers">
-                <app-player-box [player]="p"></app-player-box>
+              <label for="search">Search Players</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search..."
+                (keyup)="searchPlayers()"
+                [(ngModel)]="searchTerm"
+                name="search"
+              />
+              <div class= "h-100" dragula="COPYABLE" id="source" [(dragulaModel)]="availablePlayers">
+                <div [class.disabled]="!p.isAvailable" *ngFor="let p of availablePlayers">
+                  <app-player-box  [player]="p"></app-player-box>
+                </div>
               </div>
             </div>
           </div>

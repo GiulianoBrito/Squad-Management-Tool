@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Team } from './models';
 import { Player } from './models/player';
 
@@ -6,6 +7,8 @@ import { Player } from './models/player';
   providedIn: 'root'
 })
 export class TeamService {
+  private playerAddedSource = new Subject<String>();
+  playerAdded$ = this.playerAddedSource.asObservable();
   private relevantTeam: Team = new Team();
   private teamList!: Team[];
   private allPlayers: Player[] =[{
@@ -86,6 +89,10 @@ export class TeamService {
 
   public getMatchingPlayers(searchTerm:String):Player[]{
     return this.allPlayers.filter(valid => valid.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
+  }
+
+  public announcePlayerAdded(playerName: String){
+    this.playerAddedSource.next(playerName);
   }
 
 }

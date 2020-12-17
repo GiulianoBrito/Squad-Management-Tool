@@ -15,6 +15,7 @@ export class TeamBoxComponent implements OnInit {
 
   @Output()
   public teamRemoved = new EventEmitter<Team>();
+  
   constructor(private router: Router, private teamService: TeamService) { }
 
   ngOnInit(): void {
