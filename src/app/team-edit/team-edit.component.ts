@@ -37,7 +37,6 @@ export class TeamEditComponent implements OnInit {
         return source.id === 'source' && !el.classList.contains('disabled');
       },
       copyItem: (player: Player) => {
-        this.teamService.announcePlayerDropped(player.name);
         return player;
       },
       accepts: (el, target, source, sibling) => {
@@ -75,8 +74,11 @@ export class TeamEditComponent implements OnInit {
 
   updatePlayer(index: number) {
     setTimeout(() => {
-      if (this.droppedPlayer.length > 0) {
+      if (this.droppedPlayer.length > 0 && !(this.team.players[index] !== null && this.team.players[index]!== undefined)) {        
+        this.teamService.announcePlayerDropped(this.droppedPlayer[0].name);
         this.team.players[index] = this.droppedPlayer.pop();
+      }else{
+        this.droppedPlayer.pop();
       }
     }, 50);
   }
