@@ -33,7 +33,7 @@ export class TeamEditComponent implements OnInit {
         return (source.id === 'source' && !el.classList.contains('disabled'));        
       },
       copyItem: (player:Player) => {
-        this.teamService.announcePlayerAdded(player.name);
+        this.teamService.announcePlayerDropped(player.name);
         return player},
       accepts: (el, target, source, sibling) => {
         // To avoid dragging to source container

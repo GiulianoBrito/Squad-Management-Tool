@@ -7,8 +7,8 @@ import { Player } from './models/player';
   providedIn: 'root'
 })
 export class TeamService {
-  private playerAddedSource = new Subject<String>();
-  playerAdded$ = this.playerAddedSource.asObservable();
+  private playerDroppedSource = new Subject<String>();
+  playerDropped$ = this.playerDroppedSource.asObservable();
   private relevantTeam: Team = new Team();
   private teamList!: Team[];
   private allPlayers: Player[] =[{
@@ -91,8 +91,8 @@ export class TeamService {
     return this.allPlayers.filter(valid => valid.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
   }
 
-  public announcePlayerAdded(playerName: String){
-    this.playerAddedSource.next(playerName);
+  public announcePlayerDropped(playerName: String){
+    this.playerDroppedSource.next(playerName);
   }
 
   public getLowestAgeTeams():Team[]{

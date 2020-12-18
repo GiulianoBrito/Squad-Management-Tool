@@ -20,7 +20,7 @@ export class PlayerBoxComponent implements OnInit {
   constructor(private teamService: TeamService) {}
 
   ngOnInit(): void {
-    this.subscription = this.teamService.playerAdded$.subscribe(
+    this.subscription = this.teamService.playerDropped$.subscribe(
       (playerName) => {
         if (this.player.name === playerName) {
           this.addPlayer();
@@ -32,7 +32,7 @@ export class PlayerBoxComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  
+
   addPlayer(): void {
     if (this.player.isAvailable) {
       this.playerAdded.emit(this.player);
