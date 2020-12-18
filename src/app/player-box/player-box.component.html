@@ -1,7 +1,11 @@
 <div class="container-fluid p-3" [class.disabled]="!player.isAvailable">
   <div class="d-flex justify-content-between w-100">
-    <div><b class="text-dark">Name:</b> {{ player.name }}</div>
-    <div class="px-3"><b class="text-dark">Age:</b> {{ player.age }}</div>
+    <div>
+      <b class="text-dark">Name:</b> {{ player.name }}
+    </div>
+    <div class="px-3">
+      <b class="text-dark">Age:</b> {{ player.age }}
+    </div>
   </div>
   <b class="text-dark my-2">Nacionality: </b
   ><span>{{ player.nacionality }}</span>

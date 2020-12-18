@@ -48,7 +48,9 @@ export class TeamEditComponent implements OnInit {
         return (
           !el.classList.contains('disabled') &&
           !source.classList.contains('player-placed') &&
-          source.tagName === 'DIV'
+          (source.tagName === 'DIV' ||
+          source.tagName === 'B' ||
+          source.tagName === 'SPAN')
         );
       },
     });
@@ -127,6 +129,9 @@ export class TeamEditComponent implements OnInit {
   calcAvgAge(): void {
     var ageSum: number = 0;
     var playerCount: number = 0;
+    if(this.team.players.length=== 0){
+      return null;
+    }
     this.team.players.forEach((p) => {
       if (p !== null) {
         ageSum += p.age;
