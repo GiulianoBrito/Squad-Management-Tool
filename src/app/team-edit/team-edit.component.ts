@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { DragulaService } from 'ng2-dragula';
 import { Team } from '../models';
 import { Player } from '../models/player';
@@ -21,6 +22,7 @@ export class TeamEditComponent implements OnInit {
   public formations = FORMATIONS;
   public keyList: string[];
   public currentFormation;
+  originIcon = faGlobe;
 
   constructor(
     private router: Router,
@@ -35,7 +37,6 @@ export class TeamEditComponent implements OnInit {
       },
       copyItem: (player: Player) => {
         this.teamService.announcePlayerDropped(player.name);
-        console.log(this.droppedPlayer);
         return player;
       },
       accepts: (el, target, source, sibling) => {
@@ -44,7 +45,7 @@ export class TeamEditComponent implements OnInit {
       },
       revertOnSpill: true,
       moves: (el, target, source, sibling) => {
-        return !(el.classList.contains('disabled') || source.id === 'target');
+        return !(el.classList.contains('disabled') || source.classList.contains('player-existente'));
       },
     });
     this.team = this.teamService.getTeam();
@@ -97,11 +98,13 @@ export class TeamEditComponent implements OnInit {
     this.availablePlayers = this.teamService.getMatchingPlayers(
       this.searchTerm
     );
+    console.log(this.availablePlayers);
+    console.log(this.team.players);
     this.availablePlayers.forEach(
       (p) =>
         (p.isAvailable =
-          !this.team.players.includes(p))
-    );
+          (this.team.players.filter((pla)=>pla!==null).find((pl)=>pl.name === p.name)===undefined)
+    ));
   }
 
   addPlayer(player: Player): void {

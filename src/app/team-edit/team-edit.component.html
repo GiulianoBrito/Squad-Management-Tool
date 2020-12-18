@@ -113,7 +113,7 @@
           <div class="row">
             <div class="col subtitle">CONFIGURE SQUAD</div>
           </div>
-          <div class="row">
+          <div class="row pb-5">
             <div class="col-md">
               <select class="form-control" (change)="updateFormation()" [(ngModel)]="team.formation">
                 <option [ngValue]="k" *ngFor="let k of keyList">{{k}}</option>
@@ -122,8 +122,7 @@
               <div class="field-separator"></div>
               <div class="field-ball"></div>
                 <div>
-                  <div
-                    id="target"
+                  <div                    
                     class="player-field"
                     *ngFor="let slot of currentFormation;index as idx"
                     [style.top]="slot.top"
@@ -132,7 +131,12 @@
                     [(dragulaModel)]="droppedPlayer"
                     (mouseup)="updatePlayer(idx)"
                   >
-                    <ng-container *ngIf="(team.players[idx] !== undefined && team.players[idx] !== null)">{{ team.players[idx].initials }}</ng-container>
+                    <div class="player-existente" *ngIf="(team.players[idx] !== undefined && team.players[idx] !== null)">{{ team.players[idx].initials }}</div>
+                    <div class="player-tooltip" *ngIf="(team.players[idx] !== undefined && team.players[idx] !== null)">
+                      <div class="player-tooltip-name"><b>{{team.players[idx].name}}</b></div>
+                      <span><b>Age:</b> {{team.players[idx].age}}</span>
+                      <div><b><fa-icon [icon]="originIcon"></fa-icon></b> {{team.players[idx].nacionality}}</div>
+                    </div>
                   </div>
                 </div>
               </div>
