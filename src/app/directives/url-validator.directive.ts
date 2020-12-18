@@ -13,6 +13,9 @@ import { AbstractControl, NG_VALIDATORS, Validator } from '@angular/forms';
 })
 export class UrlValidatorDirective implements Validator {
   validate(control: AbstractControl): { [key: string]: any } | null {
+    if(control.value === null){
+      return null;
+    }
     let matcher = (control.value as String).match(
       /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
     );
