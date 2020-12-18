@@ -133,7 +133,7 @@
                     [style.left]="slot.left"
                     dragula="COPYABLE"
                     [(dragulaModel)]="droppedPlayer"
-                    (mouseup)="updatePlayer(idx)"
+                    (dragulaModelChange)="updatePlayer(idx)"
                   >
                     <div
                       class="player-placed"

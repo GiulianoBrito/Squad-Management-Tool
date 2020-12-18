@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Team } from './models';
@@ -11,50 +12,7 @@ export class TeamService {
   playerDropped$ = this.playerDroppedSource.asObservable();
   private relevantTeam: Team = new Team();
   private teamList!: Team[];
-  private allPlayers: Player[] = [
-    {
-      name: 'Zinedini Zidane',
-      age: 23,
-      nacionality: 'France',
-      initials: 'ZZ',
-    },
-    {
-      name: 'Cristiano Ronaldo',
-      age: 30,
-      nacionality: 'Portugal',
-      initials: 'CR',
-    },
-    {
-      name: 'Ronaldo da Silva de Souza',
-      age: 18,
-      nacionality: 'Brazil',
-      initials: 'RS',
-    },
-    {
-      name: 'Giuliano Brito',
-      age: 24,
-      nacionality: 'Brazil',
-      initials: 'GB',
-    },
-    {
-      name: 'José Silva',
-      age: 20,
-      nacionality: 'Brazil',
-      initials: 'JS',
-    },
-    {
-      name: 'João Santos',
-      age: 23,
-      nacionality: 'Brazil',
-      initials: 'JS',
-    },
-    {
-      name: 'Mateus Alves',
-      age: 26,
-      nacionality: 'Brazil',
-      initials: 'MA',
-    },
-  ];
+  private allPlayers: Player[] = [];
   private leastPickedPlayer: Player = {
     name: 'Zinedini Zidane',
     age: 23,
@@ -68,8 +26,11 @@ export class TeamService {
     initials: 'CR',
   };
 
-  constructor() {
+  constructor(httpClient: HttpClient) {
     this.teamList = JSON.parse(localStorage.getItem('teamList') || '[]');
+    httpClient.get<string>('http://localhost:3000').subscribe((list)=>{
+      this.allPlayers = JSON.parse(list);
+    })
   }
 
   public getTeam(): Team {
@@ -99,8 +60,8 @@ export class TeamService {
     this.saveState();
   }
 
-  public getAllPlayers(): Player[] {
-    return this.allPlayers;
+  public setAllPlayers(players: Player[]): void {
+    this.allPlayers = players;
   }
 
   public getMostPickedPlayer(): Player {
@@ -126,13 +87,13 @@ export class TeamService {
   }
 
   public getLowestAgeTeams(): Team[] {
-    return this.teamList
+    return this.teamList.filter((t)=>t.avgAge !== null)
       .sort((a, b) => (a.avgAge > b.avgAge ? 1 : -1))
       .slice(0, 5);
   }
 
   public getHighestAgeTeams(): Team[] {
-    return this.teamList
+    return this.teamList.filter((t)=>t.avgAge !== null)
       .sort((a, b) => (a.avgAge < b.avgAge ? 1 : -1))
       .slice(0, 5);
   }

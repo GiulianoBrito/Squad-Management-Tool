@@ -49,13 +49,13 @@ export class TeamEditComponent implements OnInit {
           !el.classList.contains('disabled') &&
           !source.classList.contains('player-placed') &&
           (source.tagName === 'DIV' ||
-          source.tagName === 'B' ||
-          source.tagName === 'SPAN')
+            source.tagName === 'B' ||
+            source.tagName === 'SPAN')
         );
       },
     });
     this.team = this.teamService.getTeam();
-    this.searchPlayers();
+    this.searchPlayers();    
     this.keyList = Object.keys(this.formations);
     this.currentFormation = this.formations[this.team.formation];
   }
@@ -75,20 +75,18 @@ export class TeamEditComponent implements OnInit {
   }
 
   updatePlayer(index: number) {
-    setTimeout(() => {
-      if (
-        this.droppedPlayer.length > 0 &&
-        !(
-          this.team.players[index] !== null &&
-          this.team.players[index] !== undefined
-        )
-      ) {
-        this.teamService.announcePlayerDropped(this.droppedPlayer[0].name);
-        this.team.players[index] = this.droppedPlayer.pop();
-      } else {
-        this.droppedPlayer.pop();
-      }
-    }, 50);
+    if (
+      this.droppedPlayer.length > 0 &&
+      !(
+        this.team.players[index] !== null &&
+        this.team.players[index] !== undefined
+      )
+    ) {
+      this.teamService.announcePlayerDropped(this.droppedPlayer[0].name);
+      this.team.players[index] = this.droppedPlayer.pop();
+    } else {
+      this.droppedPlayer.pop();
+    }
   }
 
   addTag(event: KeyboardEvent): void {
@@ -129,7 +127,7 @@ export class TeamEditComponent implements OnInit {
   calcAvgAge(): void {
     var ageSum: number = 0;
     var playerCount: number = 0;
-    if(this.team.players.length=== 0){
+    if (this.team.players.length === 0) {
       return null;
     }
     this.team.players.forEach((p) => {
