@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TeamEditComponent} from './team-edit/team-edit.component';
+import { TeamEditComponent } from './team-edit/team-edit.component';
 import { TeamViewComponent } from './team-view/team-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TeamBoxComponent } from './team-box/team-box.component';
@@ -19,7 +19,7 @@ import { UrlValidatorDirective } from './directives/url-validator.directive';
     TeamViewComponent,
     TeamBoxComponent,
     UrlValidatorDirective,
-    PlayerBoxComponent
+    PlayerBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,9 +27,9 @@ import { UrlValidatorDirective } from './directives/url-validator.directive';
     FormsModule,
     ReactiveFormsModule,
     DragulaModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

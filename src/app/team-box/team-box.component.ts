@@ -2,35 +2,33 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Team } from '../models';
 import { TeamService } from '../team.service';
-import { faPencilAlt,faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-team-box',
   templateUrl: './team-box.component.html',
-  styleUrls: ['./team-box.component.scss']
+  styleUrls: ['./team-box.component.scss'],
 })
 export class TeamBoxComponent implements OnInit {
   faPencilAlt = faPencilAlt;
   faTrash = faTrash;
-  
+
   @Input()
   public team!: Team;
 
   @Output()
   public teamRemoved = new EventEmitter<Team>();
-  
-  constructor(private router: Router, private teamService: TeamService) { }
 
-  ngOnInit(): void {
-  }
+  constructor(private router: Router, private teamService: TeamService) {}
+
+  ngOnInit(): void {}
 
   removeTeam(): void {
     this.teamRemoved.emit(this.team);
   }
 
-  editTeam(): void{
-    this.teamService.setTeam(this.team)
+  editTeam(): void {
+    this.teamService.setTeam(this.team);
     this.router.navigate(['/edit']);
   }
-
 }

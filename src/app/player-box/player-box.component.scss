@@ -1,12 +1,12 @@
-.container-fluid{
-    margin-top:1rem;
-    border: 1px #DADADA dashed;
-    background-image: linear-gradient(to bottom,#FFF,#E5E5E5);
-    color: #C50341;
-    cursor:pointer;
+.container-fluid {
+  margin-top: 1rem;
+  border: 1px #dadada dashed;
+  background-image: linear-gradient(to bottom, #fff, #e5e5e5);
+  color: #c50341;
+  cursor: pointer;
 }
 
-.disabled{
-    cursor:not-allowed;
-    background-image: linear-gradient(to bottom,#EEE,#B5b5b5);
+.disabled {
+  cursor: not-allowed;
+  background-image: linear-gradient(to bottom, #eee, #b5b5b5);
 }

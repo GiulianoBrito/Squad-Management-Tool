@@ -115,27 +115,55 @@
           </div>
           <div class="row pb-5">
             <div class="col-md">
-              <select class="form-control" (change)="updateFormation()" [(ngModel)]="team.formation">
-                <option [ngValue]="k" *ngFor="let k of keyList">{{k}}</option>
+              <select
+                class="form-control"
+                (change)="updateFormation()"
+                [(ngModel)]="team.formation"
+              >
+                <option [ngValue]="k" *ngFor="let k of keyList">{{ k }}</option>
               </select>
               <div class="field-card card-block">
-              <div class="field-separator"></div>
-              <div class="field-ball"></div>
+                <div class="field-separator"></div>
+                <div class="field-ball"></div>
                 <div>
-                  <div                    
+                  <div
                     class="player-field"
-                    *ngFor="let slot of currentFormation;index as idx"
+                    *ngFor="let slot of currentFormation; index as idx"
                     [style.top]="slot.top"
                     [style.left]="slot.left"
                     dragula="COPYABLE"
                     [(dragulaModel)]="droppedPlayer"
                     (mouseup)="updatePlayer(idx)"
                   >
-                    <div class="player-existente" *ngIf="(team.players[idx] !== undefined && team.players[idx] !== null)">{{ team.players[idx].initials }}</div>
-                    <div class="player-tooltip" *ngIf="(team.players[idx] !== undefined && team.players[idx] !== null)">
-                      <div class="player-tooltip-name"><b>{{team.players[idx].name}}</b></div>
-                      <span><b>Age:</b> {{team.players[idx].age}}</span>
-                      <div><b><fa-icon [icon]="originIcon"></fa-icon></b> {{team.players[idx].nacionality}}</div>
+                    <div
+                      class="player-placed"
+                      *ngIf="
+                        team.players[idx] !== undefined &&
+                          team.players[idx] !== null;
+                        else elseBlock
+                      "
+                    >
+                      {{ team.players[idx].initials }}
+                    </div>
+                    <ng-template #elseBlock
+                      ><div class="player-placed">
+                        <fa-icon [icon]="plusIcon"></fa-icon></div
+                    ></ng-template>
+                    <div
+                      class="player-tooltip"
+                      *ngIf="
+                        team.players[idx] !== undefined &&
+                        team.players[idx] !== null
+                      "
+                    >
+                      <div class="player-tooltip-name">
+                        <b>{{ team.players[idx].name }}</b>
+                      </div>
+                      <span><b>Age:</b> {{ team.players[idx].age }}</span>
+                      <div>
+                        <b><fa-icon [icon]="originIcon"></fa-icon></b>
+                        {{ team.players[idx].nacionality }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -152,7 +180,7 @@
                 name="search"
               />
               <div
-                class="h-100"
+                class="players-container"
                 dragula="COPYABLE"
                 id="source"
                 [(dragulaModel)]="availablePlayers"

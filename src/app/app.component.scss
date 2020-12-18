@@ -1,31 +1,31 @@
-.main-header{
-    height:64px;
-    background-image: linear-gradient(to right, #BE0E4F, #862268);
-    z-index: 1;
+.main-header {
+  height: 64px;
+  background-image: linear-gradient(to right, #be0e4f, #862268);
+  z-index: 1;
 }
 
-.logo{
-    color:white;
-    font-weight: bold;
-    cursor:pointer;
+.logo {
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.user-profile{
-    color:white;
-    font-weight: 600;
+.user-profile {
+  color: white;
+  font-weight: 600;
 }
 
-.main-content{
-    background-color: #F7F3F7;
-    height:calc(100% - 96px);
-    overflow:auto;
+.main-content {
+  background-color: #f7f3f7;
+  height: calc(100% - 96px);
+  overflow: auto;
 }
 
-.footer{
-    background-color: #E9E3E9;
-    height: 32px;
-    text-align: center;
-    font-size:small;
-    vertical-align: middle;
-    line-height: 32px;
+.footer {
+  background-color: #e9e3e9;
+  height: 32px;
+  text-align: center;
+  font-size: small;
+  vertical-align: middle;
+  line-height: 32px;
 }

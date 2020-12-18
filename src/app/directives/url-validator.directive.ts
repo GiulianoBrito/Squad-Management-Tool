@@ -16,7 +16,7 @@ export class UrlValidatorDirective implements Validator {
     let matcher = (control.value as String).match(
       /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
     );
-    if (!matcher) { 
+    if (!matcher) {
       return {
         url: true,
       };

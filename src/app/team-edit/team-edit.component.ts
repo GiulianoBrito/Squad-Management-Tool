@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { DragulaService } from 'ng2-dragula';
 import { Team } from '../models';
 import { Player } from '../models/player';
@@ -23,6 +23,7 @@ export class TeamEditComponent implements OnInit {
   public keyList: string[];
   public currentFormation;
   originIcon = faGlobe;
+  plusIcon = faPlus;
 
   constructor(
     private router: Router,
@@ -45,7 +46,11 @@ export class TeamEditComponent implements OnInit {
       },
       revertOnSpill: true,
       moves: (el, target, source, sibling) => {
-        return !(el.classList.contains('disabled') || source.classList.contains('player-existente'));
+        return (
+          !el.classList.contains('disabled') &&
+          !source.classList.contains('player-placed') &&
+          source.tagName === 'DIV'
+        );
       },
     });
     this.team = this.teamService.getTeam();
@@ -98,13 +103,13 @@ export class TeamEditComponent implements OnInit {
     this.availablePlayers = this.teamService.getMatchingPlayers(
       this.searchTerm
     );
-    console.log(this.availablePlayers);
-    console.log(this.team.players);
     this.availablePlayers.forEach(
       (p) =>
         (p.isAvailable =
-          (this.team.players.filter((pla)=>pla!==null).find((pl)=>pl.name === p.name)===undefined)
-    ));
+          this.team.players
+            .filter((pla) => pla !== null)
+            .find((pl) => pl.name === p.name) === undefined)
+    );
   }
 
   addPlayer(player: Player): void {
@@ -115,8 +120,8 @@ export class TeamEditComponent implements OnInit {
     var ageSum: number = 0;
     var playerCount: number = 0;
     this.team.players.forEach((p) => {
-      if(p!== null){
-        ageSum += p.age
+      if (p !== null) {
+        ageSum += p.age;
         playerCount++;
       }
     });

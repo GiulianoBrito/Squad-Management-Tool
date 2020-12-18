@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Team } from '../models';
 import { Player } from '../models/player';
 import { TeamService } from '../team.service';
-import { faSort} from '@fortawesome/free-solid-svg-icons';
+import { faSort } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-team-view',
@@ -37,7 +37,7 @@ export class TeamViewComponent implements OnInit {
     this.router.navigate(['/edit']);
   }
 
-  editTeam(team:Team):void{
+  editTeam(team: Team): void {
     this.teamService.setTeam(team);
     this.router.navigate(['/edit']);
   }
@@ -47,9 +47,9 @@ export class TeamViewComponent implements OnInit {
       this.teamList.sort((a, b) => (a.name > b.name ? 1 : -1));
       this.isSortedNameAsc = true;
       this.isSortedDescriptionAsc = false;
-    }else{
+    } else {
       this.teamList.sort((a, b) => (a.name < b.name ? 1 : -1));
-      this.isSortedNameAsc = false;      
+      this.isSortedNameAsc = false;
       this.isSortedDescriptionAsc = false;
     }
   }
@@ -59,14 +59,16 @@ export class TeamViewComponent implements OnInit {
       this.teamList.sort((a, b) => (a.description > b.description ? 1 : -1));
       this.isSortedDescriptionAsc = true;
       this.isSortedNameAsc = false;
-    }else{
+    } else {
       this.teamList.sort((a, b) => (a.description < b.description ? 1 : -1));
       this.isSortedDescriptionAsc = false;
       this.isSortedNameAsc = false;
     }
   }
 
-  removeTeam(team: Team){    
+  removeTeam(team: Team) {
     this.teamService.removeTeam(team);
+    this.highestAgeTeams = this.teamService.getHighestAgeTeams();
+    this.lowestAgeTeams = this.teamService.getLowestAgeTeams();
   }
 }

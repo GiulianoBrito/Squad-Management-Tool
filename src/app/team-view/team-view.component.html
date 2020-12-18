@@ -14,19 +14,26 @@
           </div>
         </div>
         <hr />
-        <div class="p-4">
+        <div class="pb-0 p-4">
           <div class="row no-gutters">
-            <button (click)="sortName()" class="col-3 sort-button">Name <fa-icon [icon]="sortNameIcon"></fa-icon></button>
+            <button (click)="sortName()" class="col-3 sort-button">
+              Name <fa-icon [icon]="sortNameIcon"></fa-icon>
+            </button>
             <span class="sort-separator"></span>
-            <button (click)="sortDescription()" class="col-9 sort-button sort-button-right">
+            <button
+              (click)="sortDescription()"
+              class="col-9 sort-button sort-button-right"
+            >
               Description <fa-icon [icon]="sortDescIcon"></fa-icon>
             </button>
           </div>
-          <div *ngFor="let t of teamList">
-            <app-team-box
-              [team]="t"
-              (teamRemoved)="removeTeam($event)"
-            ></app-team-box>       
+          <div class="players-container">
+            <div *ngFor="let t of teamList">
+              <app-team-box
+                [team]="t"
+                (teamRemoved)="removeTeam($event)"
+              ></app-team-box>
+            </div>
           </div>
         </div>
       </div>
@@ -41,7 +48,11 @@
           <div class="col-md">
             <b>Highest Average Age</b>
             <div class="card-block gray-bg">
-              <div class="top-items" *ngFor="let hT of highestAgeTeams" (click)="editTeam(hT)">
+              <div
+                class="top-items"
+                *ngFor="let hT of highestAgeTeams"
+                (click)="editTeam(hT)"
+              >
                 {{ hT.name }} <b>{{ hT.avgAge }}</b>
               </div>
             </div>
@@ -49,7 +60,11 @@
           <div class="col-md">
             <b>Lowest Average Age</b>
             <div class="card-block gray-bg">
-              <div class="top-items" *ngFor="let lT of lowestAgeTeams" (click)="editTeam(lT)">
+              <div
+                class="top-items"
+                *ngFor="let lT of lowestAgeTeams"
+                (click)="editTeam(lT)"
+              >
                 {{ lT.name }} <b>{{ lT.avgAge }}</b>
               </div>
             </div>

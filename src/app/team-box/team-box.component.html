@@ -2,7 +2,11 @@
   <span class="col-3 px-2">{{ team.name }}</span>
   <span class="col-8 px-1">{{ team.description }}</span>
   <div class="col-1">
-    <button class="w-50" (click)="removeTeam()"><fa-icon [icon]="faTrash"></fa-icon></button>
-    <button class="w-50" (click)="editTeam()"><fa-icon [icon]="faPencilAlt"></fa-icon></button>
+    <button class="w-50" (click)="removeTeam()">
+      <fa-icon [icon]="faTrash"></fa-icon>
+    </button>
+    <button class="w-50" (click)="editTeam()">
+      <fa-icon [icon]="faPencilAlt"></fa-icon>
+    </button>
   </div>
 </div>

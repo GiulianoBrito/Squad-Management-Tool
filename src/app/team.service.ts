@@ -4,104 +4,136 @@ import { Team } from './models';
 import { Player } from './models/player';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TeamService {
   private playerDroppedSource = new Subject<String>();
   playerDropped$ = this.playerDroppedSource.asObservable();
   private relevantTeam: Team = new Team();
   private teamList!: Team[];
-  private allPlayers: Player[] =[{
-    "name":"Zinedini Zidane",
-    "age":23,    
-    "nacionality":"France",
-    "initials": "ZZ"
-  },{
-    "name":"Cristiano Ronaldo",
-    "age":30,
-    "nacionality":"Portugal",
-    "initials": "CR"
-  },{
-    "name":"Ronaldo da Silva de Souza",
-    "age":18,
-    "nacionality":"Brazil",
-    "initials": "RS"  
-  }]
+  private allPlayers: Player[] = [
+    {
+      name: 'Zinedini Zidane',
+      age: 23,
+      nacionality: 'France',
+      initials: 'ZZ',
+    },
+    {
+      name: 'Cristiano Ronaldo',
+      age: 30,
+      nacionality: 'Portugal',
+      initials: 'CR',
+    },
+    {
+      name: 'Ronaldo da Silva de Souza',
+      age: 18,
+      nacionality: 'Brazil',
+      initials: 'RS',
+    },
+    {
+      name: 'Giuliano Brito',
+      age: 24,
+      nacionality: 'Brazil',
+      initials: 'GB',
+    },
+    {
+      name: 'José Silva',
+      age: 20,
+      nacionality: 'Brazil',
+      initials: 'JS',
+    },
+    {
+      name: 'João Santos',
+      age: 23,
+      nacionality: 'Brazil',
+      initials: 'JS',
+    },
+    {
+      name: 'Mateus Alves',
+      age: 26,
+      nacionality: 'Brazil',
+      initials: 'MA',
+    },
+  ];
   private leastPickedPlayer: Player = {
-    "name":"Zinedini Zidane",
-    "age":23,
-    "nacionality":"France",
-    "initials": "ZZ"
+    name: 'Zinedini Zidane',
+    age: 23,
+    nacionality: 'France',
+    initials: 'ZZ',
   };
-  private mostPickedPlayer: Player= {
-    "name":"Cristiano Ronaldo",
-    "age":24,
-    "nacionality":"Portugal",
-    "initials": "CR"
+  private mostPickedPlayer: Player = {
+    name: 'Cristiano Ronaldo',
+    age: 24,
+    nacionality: 'Portugal',
+    initials: 'CR',
   };
 
   constructor() {
     this.teamList = JSON.parse(localStorage.getItem('teamList') || '[]');
-    console.log(this.teamList);
-   }
+  }
 
-  public getTeam() :Team {
+  public getTeam(): Team {
     return this.relevantTeam;
   }
 
-  public setTeam(team: Team) : void{
+  public setTeam(team: Team): void {
     this.relevantTeam = team;
   }
 
-  public getTeamList(): Team[]{
+  public getTeamList(): Team[] {
     return this.teamList;
   }
-  
-  public addTeam(team: Team) : void{
-    if(this.teamList.indexOf(team) === -1){
-      this.teamList.push(team);     
-    }  
-    this.saveState();
-  }
 
-  public removeTeam(team: Team): void{
-    let idx = this.teamList.indexOf(team);
-    if(~idx){
-      this.teamList.splice(idx,1);
+  public addTeam(team: Team): void {
+    if (this.teamList.indexOf(team) === -1) {
+      this.teamList.push(team);
     }
     this.saveState();
   }
 
-  public getAllPlayers():Player[]{
+  public removeTeam(team: Team): void {
+    let idx = this.teamList.indexOf(team);
+    if (~idx) {
+      this.teamList.splice(idx, 1);
+    }
+    this.saveState();
+  }
+
+  public getAllPlayers(): Player[] {
     return this.allPlayers;
   }
 
-  public getMostPickedPlayer():Player{
+  public getMostPickedPlayer(): Player {
     return this.mostPickedPlayer;
   }
 
-  public getLeastPickedPlayer():Player{
+  public getLeastPickedPlayer(): Player {
     return this.leastPickedPlayer;
   }
 
-  public saveState(){
-    localStorage.setItem('teamList',JSON.stringify(this.teamList));
+  public saveState() {
+    localStorage.setItem('teamList', JSON.stringify(this.teamList));
   }
 
-  public getMatchingPlayers(searchTerm:String):Player[]{
-    return this.allPlayers.filter(valid => valid.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
+  public getMatchingPlayers(searchTerm: String): Player[] {
+    return this.allPlayers.filter(
+      (valid) => valid.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+    );
   }
 
-  public announcePlayerDropped(playerName: String){
+  public announcePlayerDropped(playerName: String) {
     this.playerDroppedSource.next(playerName);
   }
 
-  public getLowestAgeTeams():Team[]{
-    return this.teamList.sort((a,b)=> (a.avgAge > b.avgAge)? 1 :-1).slice(0,5);
+  public getLowestAgeTeams(): Team[] {
+    return this.teamList
+      .sort((a, b) => (a.avgAge > b.avgAge ? 1 : -1))
+      .slice(0, 5);
   }
 
-  public getHighestAgeTeams():Team[]{
-    return this.teamList.sort((a,b)=> (a.avgAge < b.avgAge)? 1 :-1).slice(0,5);
+  public getHighestAgeTeams(): Team[] {
+    return this.teamList
+      .sort((a, b) => (a.avgAge < b.avgAge ? 1 : -1))
+      .slice(0, 5);
   }
-
 }

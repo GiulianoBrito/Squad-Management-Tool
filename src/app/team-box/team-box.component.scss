@@ -1,30 +1,30 @@
-fa-icon{
-   color: #B13D7C;
-   background-color: none;
+fa-icon {
+  color: #b13d7c;
+  background-color: none;
 }
 
-button{
-    background: none;
-    text-align: center;
-    border: 0;
-    visibility:hidden;
+button {
+  background: none;
+  text-align: center;
+  border: 0;
+  visibility: hidden;
 }
 
-:hover{
-    background-color: #F7EEF7;
-    border-radius: 5%;
-    color:#B13D7C;
+:hover {
+  background-color: #f7eef7;
+  border-radius: 5%;
+  color: #b13d7c;
 }
 
-:hover button{
-    visibility:visible;
+:hover button {
+  visibility: visible;
 }
 
-span{
-    font-weight: 600;
-    word-wrap: break-word;
+span {
+  font-weight: 600;
+  word-wrap: break-word;
 }
 
-.row{
-    border-bottom: solid 1px #eee;
+.row {
+  border-bottom: solid 1px #eee;
 }
