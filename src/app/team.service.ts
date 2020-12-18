@@ -42,6 +42,7 @@ export class TeamService {
 
   constructor() {
     this.teamList = JSON.parse(localStorage.getItem('teamList') || '[]');
+    console.log(this.teamList);
    }
 
   public getTeam() :Team {

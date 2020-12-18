@@ -115,25 +115,24 @@
           </div>
           <div class="row">
             <div class="col-md">
-              <select class="form-control" (change)="updateFormation()" [(ngModel)]="formationKey">
+              <select class="form-control" (change)="updateFormation()" [(ngModel)]="team.formation">
                 <option [ngValue]="k" *ngFor="let k of keyList">{{k}}</option>
               </select>
               <div class="field-card card-block">
               <div class="field-separator"></div>
               <div class="field-ball"></div>
-                <div
-                  class="drag-target"
-                  dragula="COPYABLE"
-                  [(dragulaModel)]="team.players"
-                >
+                <div>
                   <div
                     id="target"
                     class="player-field"
                     *ngFor="let slot of currentFormation;index as idx"
                     [style.top]="slot.top"
                     [style.left]="slot.left"
+                    dragula="COPYABLE"
+                    [(dragulaModel)]="droppedPlayer"
+                    (mouseup)="updatePlayer(idx)"
                   >
-                    <ng-container *ngIf="team.players[idx] !== undefined">{{ team.players[idx].initials }}</ng-container>
+                    <ng-container *ngIf="(team.players[idx] !== undefined && team.players[idx] !== null)">{{ team.players[idx].initials }}</ng-container>
                   </div>
                 </div>
               </div>

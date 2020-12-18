@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  NgForm,
-} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
 import { Team } from '../models';
@@ -18,40 +16,46 @@ export class TeamEditComponent implements OnInit {
   public team!: Team;
   public currentTag: String = '';
   public availablePlayers!: Player[];
+  public droppedPlayer: Player[] = [];
   public searchTerm: String = '';
   public formations = FORMATIONS;
-  public formationKey: string = '3-2-2-3';
   public keyList: string[];
-  public currentFormation = this.formations[this.formationKey];
+  public currentFormation;
 
-  constructor(private router: Router, private teamService: TeamService, private dragulaService: DragulaService) {   
-  }
+  constructor(
+    private router: Router,
+    private teamService: TeamService,
+    private dragulaService: DragulaService
+  ) {}
 
   ngOnInit(): void {
     this.dragulaService.createGroup('COPYABLE', {
-      copy: (el, source) => {        
-        return (source.id === 'source' && !el.classList.contains('disabled'));        
+      copy: (el, source) => {
+        return source.id === 'source' && !el.classList.contains('disabled');
       },
-      copyItem: (player:Player) => {
+      copyItem: (player: Player) => {
         this.teamService.announcePlayerDropped(player.name);
-        return player},
+        console.log(this.droppedPlayer);
+        return player;
+      },
       accepts: (el, target, source, sibling) => {
         // To avoid dragging to source container
         return target.id !== 'source';
       },
       revertOnSpill: true,
       moves: (el, target, source, sibling) => {
-        return !(el.classList.contains('disabled') || source.id === "target");}
-    }); 
+        return !(el.classList.contains('disabled') || source.id === 'target');
+      },
+    });
     this.team = this.teamService.getTeam();
     this.searchPlayers();
     this.keyList = Object.keys(this.formations);
+    this.currentFormation = this.formations[this.team.formation];
   }
 
-  ngOnDestroy():void{
+  ngOnDestroy(): void {
     this.dragulaService.destroy('COPYABLE');
-  } 
-
+  }
 
   onSubmit(teamForm: NgForm): void {
     if (!teamForm.form.valid) {
@@ -63,11 +67,22 @@ export class TeamEditComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  updatePlayer(index: number) {
+    setTimeout(() => {
+      if (this.droppedPlayer.length > 0) {
+        this.team.players[index] = this.droppedPlayer.pop();
+      }
+    }, 50);
+  }
+
   addTag(event: KeyboardEvent): void {
     event.stopPropagation();
     if (event.key === ';' || event.key === 'Enter') {
       this.currentTag = this.currentTag.replace(';', '');
-      if (this.currentTag !== '' && (this.team.tags.includes(this.currentTag) === false)) {
+      if (
+        this.currentTag !== '' &&
+        this.team.tags.includes(this.currentTag) === false
+      ) {
         this.team.tags.push(this.currentTag);
       }
       this.currentTag = '';
@@ -78,25 +93,36 @@ export class TeamEditComponent implements OnInit {
     this.team.tags.splice(this.team.tags.indexOf(tag), 1);
   }
 
-  searchPlayers() : void{
-    this.availablePlayers = this.teamService.getMatchingPlayers(this.searchTerm);
-    this.availablePlayers.forEach(p => p.isAvailable = (this.team.players.find((pl)=> p.name === pl.name) === undefined));
+  searchPlayers(): void {
+    this.availablePlayers = this.teamService.getMatchingPlayers(
+      this.searchTerm
+    );
+    this.availablePlayers.forEach(
+      (p) =>
+        (p.isAvailable =
+          !this.team.players.includes(p))
+    );
   }
 
-  addPlayer(player: Player):void{
+  addPlayer(player: Player): void {
     this.team.players.push(player);
   }
 
-  calcAvgAge():void{
+  calcAvgAge(): void {
     var ageSum: number = 0;
-    this.team.players.forEach((p)=> ageSum += p.age);    
-    this.team.avgAge = ageSum/this.team.players.length;    
+    var playerCount: number = 0;
+    this.team.players.forEach((p) => {
+      if(p!== null){
+        ageSum += p.age
+        playerCount++;
+      }
+    });
+    this.team.avgAge = ageSum / playerCount;
   }
 
-  updateFormation(){
-    this.currentFormation = this.formations[this.formationKey];
-    this.team.players.forEach((p)=> p.isAvailable = true);
+  updateFormation() {
+    this.currentFormation = this.formations[this.team.formation];
+    this.team.players.forEach((p) => (p.isAvailable = true));
     this.team.players = [];
   }
-
 }

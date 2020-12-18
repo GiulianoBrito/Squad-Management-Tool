@@ -27,9 +27,10 @@ label {
   border-color: red;
 }
 
-.classe-inicial:hover + div{
-    visibility:visible;
-}
+//!CHECAR DEPOIS
+//.classe-inicial:hover + div{
+//     visibility:visible;
+// }
 
 .label-error {
   color: red;
@@ -80,9 +81,4 @@ label {
   left: 50%;
   margin: -2.5rem 0 0 -2.5rem;
   border-radius: 50%;
-}
-
-.drag-target{
-    height:540px;
-    width:100%;
 }

@@ -8,4 +8,5 @@ export class Team{
     public tags: String[] = [];
     public players: Player[] = [];
     public avgAge?: number;
+    public formation: string = '4-4-2';
 }
