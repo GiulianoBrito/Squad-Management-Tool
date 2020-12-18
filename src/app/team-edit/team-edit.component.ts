@@ -74,10 +74,16 @@ export class TeamEditComponent implements OnInit {
 
   updatePlayer(index: number) {
     setTimeout(() => {
-      if (this.droppedPlayer.length > 0 && !(this.team.players[index] !== null && this.team.players[index]!== undefined)) {        
+      if (
+        this.droppedPlayer.length > 0 &&
+        !(
+          this.team.players[index] !== null &&
+          this.team.players[index] !== undefined
+        )
+      ) {
         this.teamService.announcePlayerDropped(this.droppedPlayer[0].name);
         this.team.players[index] = this.droppedPlayer.pop();
-      }else{
+      } else {
         this.droppedPlayer.pop();
       }
     }, 50);
