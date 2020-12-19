@@ -12,7 +12,7 @@ export class TeamService {
   playerDropped$ = this.playerDroppedSource.asObservable();
   private relevantTeam: Team = new Team();
   private teamList!: Team[];
-  private allPlayers: Player[] = [];
+  private allPlayers: Player[];
   private leastPickedPlayer: Player = {
     name: 'Zinedini Zidane',
     age: 23,
@@ -87,14 +87,18 @@ export class TeamService {
   }
 
   public getLowestAgeTeams(): Team[] {
-    return this.teamList.filter((t)=>t.avgAge !== null)
+    return this.teamList.filter((t)=>(t.avgAge != undefined))
       .sort((a, b) => (a.avgAge > b.avgAge ? 1 : -1))
       .slice(0, 5);
   }
 
   public getHighestAgeTeams(): Team[] {
-    return this.teamList.filter((t)=>t.avgAge !== null)
+    return this.teamList.filter((t)=>t.avgAge != undefined)
       .sort((a, b) => (a.avgAge < b.avgAge ? 1 : -1))
       .slice(0, 5);
+  }
+
+  public isLoaded() : boolean{
+    return !!this.allPlayers; 
   }
 }

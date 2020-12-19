@@ -22,6 +22,7 @@ export class TeamEditComponent implements OnInit {
   public formations = FORMATIONS;
   public keyList: string[];
   public currentFormation;
+  private loadedPlayers: boolean = false; 
   originIcon = faGlobe;
   plusIcon = faPlus;
 
@@ -55,7 +56,6 @@ export class TeamEditComponent implements OnInit {
       },
     });
     this.team = this.teamService.getTeam();
-    this.searchPlayers();    
     this.keyList = Object.keys(this.formations);
     this.currentFormation = this.formations[this.team.formation];
   }
@@ -143,5 +143,14 @@ export class TeamEditComponent implements OnInit {
     this.currentFormation = this.formations[this.team.formation];
     this.team.players.forEach((p) => (p.isAvailable = true));
     this.team.players = [];
+  }
+
+  isLoaded(){    
+    const retLoaded = this.teamService.isLoaded();
+    if(retLoaded !== this.loadedPlayers){
+      this.searchPlayers();
+    }
+    this.loadedPlayers = retLoaded;
+    return retLoaded;
   }
 }
